@@ -1,7 +1,7 @@
-import './assets/lib/codemirror.js';
-import './assets/mode/simple/simple.min.js';
-import './assets/mode/orgmode/orgmode-fold.min.js';
-import './assets/mode/orgmode/orgmode-mode.min.js';
+import './lib/codemirror.js';
+import './mode/simple/simple.min.js';
+import './mode/orgmode/orgmode-fold.min.js';
+import './mode/orgmode/orgmode-mode.min.js';
 import { Plugin } from 'obsidian';
 
 export default class OrgMode extends Plugin {
