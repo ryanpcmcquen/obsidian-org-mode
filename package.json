@@ -1,7 +1,7 @@
 {
-  "name": "obsidian-sample-plugin",
-  "version": "0.12.0",
-  "description": "This is a sample plugin for Obsidian (https://obsidian.md)",
+  "name": "obsidian-org-mode",
+  "version": "1.0.0",
+  "description": "Add Org Mode support to Obsidian.",
   "main": "main.js",
   "scripts": {
     "dev": "rollup --config rollup.config.js -w",
@@ -9,7 +9,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "MIT",
+  "license": "MPL-2.0",
   "devDependencies": {
     "@rollup/plugin-commonjs": "^18.0.0",
     "@rollup/plugin-node-resolve": "^11.2.1",
