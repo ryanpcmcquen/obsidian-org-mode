@@ -11,13 +11,7 @@ if you want to view the source visit the plugins github repository
 `;
 
 export default {
-  input: [
-    'assets/codemirror.min.js',
-    'assets/simple.min.js',
-    'assets/orgmode-fold.min.js',
-    'assets/orgmode-mode.min.js',
-    'main.ts',
-  ],
+  input: 'main.ts',
   output: {
     dir: '.',
     sourcemap: 'inline',
