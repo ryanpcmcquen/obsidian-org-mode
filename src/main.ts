@@ -38,6 +38,16 @@ class OrgView extends TextFileView {
         // @ts-ignore
         this.codeMirror = CodeMirror(this.extContentEl, {
             theme: 'obsidian',
+
+            // I am not sure autofocus is necessary ...
+            autofocus: true,
+            foldGutter: {
+                minFoldSize: 1,
+            },
+            foldOptions: {
+                widget: ' ...',
+            },
+            gutters: ['CodeMirror-foldgutter'],
         });
 
         this.codeMirror.on('changes', this.changed);
