@@ -1,6 +1,6 @@
 {
   "name": "obsidian-org-mode",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Add Org Mode support to Obsidian.",
   "main": "main.js",
   "scripts": {

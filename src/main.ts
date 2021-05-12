@@ -76,6 +76,12 @@ class OrgView extends TextFileView {
         } else {
             this.codeMirror.setValue(data);
         }
+        // This seems to fix some odd visual bugs:
+        this.codeMirror.refresh();
+
+        // This focuses the editor, which is analogous to the
+        // default Markdown behavior in Obsidian:
+        this.codeMirror.focus();
     };
 
     clear = () => {
