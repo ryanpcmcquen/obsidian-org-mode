@@ -1,16 +1,16 @@
-import './lib/codemirror.js';
-import './mode/simple/simple.min.js';
-import './mode/orgmode/orgmode-fold.min.js';
-import './mode/orgmode/orgmode-mode.min.js';
-import { Plugin, WorkspaceLeaf, TextFileView } from 'obsidian';
+import "./lib/codemirror.js";
+import "./mode/simple/simple.min.js";
+import "./mode/orgmode/orgmode-fold.min.js";
+import "./mode/orgmode/orgmode-mode.min.js";
+import { Plugin, TextFileView, WorkspaceLeaf } from "obsidian";
 
 export default class OrgMode extends Plugin {
     async onload() {
         super.onload();
-        console.log('Loading Org Mode plugin ...');
+        console.log("Loading Org Mode plugin ...");
 
-        this.registerView('orgmode', this.orgViewCreator);
-        this.registerExtensions(['org'], 'orgmode');
+        this.registerView("orgmode", this.orgViewCreator);
+        this.registerExtensions(["org"], "orgmode");
     }
 
     orgViewCreator = (leaf: WorkspaceLeaf) => {
@@ -18,7 +18,7 @@ export default class OrgMode extends Plugin {
     };
 
     onunload() {
-        console.log('Unloading Org Mode plugin ...');
+        console.log("Unloading Org Mode plugin ...");
     }
 }
 
@@ -37,7 +37,7 @@ class OrgView extends TextFileView {
         super(leaf);
         // @ts-ignore
         this.codeMirror = CodeMirror(this.extContentEl, {
-            theme: 'obsidian',
+            theme: "obsidian",
 
             // I am not sure autofocus is necessary ...
             autofocus: true,
@@ -45,12 +45,12 @@ class OrgView extends TextFileView {
                 minFoldSize: 1,
             },
             foldOptions: {
-                widget: ' ...',
+                widget: " ...",
             },
-            gutters: ['CodeMirror-foldgutter'],
+            gutters: ["CodeMirror-foldgutter"],
         });
 
-        this.codeMirror.on('changes', this.changed);
+        this.codeMirror.on("changes", this.changed);
     }
 
     // When the view is resized, refresh CodeMirror (thanks Licat!).
@@ -59,8 +59,8 @@ class OrgView extends TextFileView {
     }
 
     changed = async (
-        instance: CodeMirror.Editor,
-        changes: CodeMirror.EditorChangeLinkedList[]
+        _instance: CodeMirror.Editor,
+        _changes: CodeMirror.EditorChangeLinkedList[]
     ) => {
         this.requestSave();
     };
@@ -72,10 +72,19 @@ class OrgView extends TextFileView {
     setViewData = (data: string, clear: boolean) => {
         if (clear) {
             // @ts-ignore
-            this.codeMirror.swapDoc(CodeMirror.Doc(data, 'orgmode'));
+            this.codeMirror.swapDoc(CodeMirror.Doc(data, "orgmode"));
         } else {
             this.codeMirror.setValue(data);
         }
+
+        // HACK:
+        // Ideally this would actually be able to find the user defined
+        // keyMap, and not just check the 'vimMode' boolean.
+        // @ts-ignore
+        if (this.app?.vault?.config?.vimMode) {
+            this.codeMirror.setOption("keyMap", "vim");
+        }
+
         // This seems to fix some odd visual bugs:
         this.codeMirror.refresh();
 
@@ -85,7 +94,7 @@ class OrgView extends TextFileView {
     };
 
     clear = () => {
-        this.codeMirror.setValue('');
+        this.codeMirror.setValue("");
         this.codeMirror.clearHistory();
     };
 
@@ -93,15 +102,15 @@ class OrgView extends TextFileView {
         if (this.file) {
             return this.file.basename;
         } else {
-            return 'org (no file)';
+            return "org (No File)";
         }
     }
 
     canAcceptExtension(extension: string) {
-        return extension === 'org';
+        return extension === "org";
     }
 
     getViewType() {
-        return 'orgmode';
+        return "orgmode";
     }
 }
