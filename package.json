@@ -3,6 +3,7 @@
     "version": "1.2.1",
     "description": "Add Org Mode support to Obsidian.",
     "main": "main.js",
+    "repository": "https://github.com/ryanpcmcquen/obsidian-org-mode",
     "scripts": {
         "dev": "rollup --config rollup.config.js -w",
         "build": "rollup --config rollup.config.js --environment BUILD:production"
