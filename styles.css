@@ -2,3 +2,15 @@
 .cm-comment {
     font-family: monospace;
 }
+
+.cm-header.cm-org-level-star {
+    font-weight: 100;
+    opacity: 0.9;
+}
+.cm-header.cm-org-level-star::after {
+    font-weight: 900;
+    opacity: 1;
+    content: "*";
+    position: absolute;
+    transform: translate(-135%, 0);
+}
