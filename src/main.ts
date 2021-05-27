@@ -1,7 +1,7 @@
 import "./lib/codemirror.js";
-import "./mode/simple/simple.min.js";
-import "./mode/orgmode/orgmode-fold.min.js";
-import "./mode/orgmode/orgmode-mode.min.js";
+import "./mode/simple/simple.js";
+import "./mode/orgmode/orgmode-fold.js";
+import "./mode/orgmode/orgmode-mode.js";
 import { Plugin, TextFileView, WorkspaceLeaf } from "obsidian";
 
 export default class OrgMode extends Plugin {
