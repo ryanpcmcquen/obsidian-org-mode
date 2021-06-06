@@ -1,8 +1,8 @@
-import "./lib/codemirror.js";
+import { Plugin, TextFileView, WorkspaceLeaf } from "obsidian";
 import "./mode/simple/simple.js";
 import "./mode/orgmode/orgmode-fold.js";
 import "./mode/orgmode/orgmode-mode.js";
-import { Plugin, TextFileView, WorkspaceLeaf } from "obsidian";
+import CodeMirror from "./lib/codemirror";
 
 export default class OrgMode extends Plugin {
     async onload() {
@@ -29,13 +29,12 @@ class OrgView extends TextFileView {
 
     // this.contentEl is not exposed, so cheat a bit.
     public get extContentEl(): HTMLElement {
-        // @ts-ignore
         return this.contentEl;
     }
 
     constructor(leaf: WorkspaceLeaf) {
         super(leaf);
-        // @ts-ignore
+
         this.codeMirror = CodeMirror(this.extContentEl, {
             theme: "obsidian",
 
@@ -48,7 +47,7 @@ class OrgView extends TextFileView {
                 widget: " ...",
             },
             gutters: ["CodeMirror-foldgutter"],
-        });
+        } as CodeMirror.EditorConfiguration);
 
         this.codeMirror.on("changes", this.changed);
     }
@@ -58,10 +57,7 @@ class OrgView extends TextFileView {
         this.codeMirror.refresh();
     }
 
-    changed = async (
-        _instance: CodeMirror.Editor,
-        _changes: CodeMirror.EditorChangeLinkedList[]
-    ) => {
+    changed = async () => {
         this.requestSave();
     };
 
@@ -71,15 +67,11 @@ class OrgView extends TextFileView {
 
     setViewData = (data: string, clear: boolean) => {
         if (clear) {
-            // @ts-ignore
             this.codeMirror.swapDoc(CodeMirror.Doc(data, "orgmode"));
         } else {
             this.codeMirror.setValue(data);
         }
 
-        // HACK:
-        // Ideally this would actually be able to find the user defined
-        // keyMap, and not just check the 'vimMode' boolean.
         // @ts-ignore
         if (this.app?.vault?.config?.vimMode) {
             this.codeMirror.setOption("keyMap", "vim");
