@@ -1,8 +1,8 @@
-import { Plugin, TextFileView, WorkspaceLeaf } from "obsidian";
+import "./lib/codemirror.js";
 import "./mode/simple/simple.js";
 import "./mode/orgmode/orgmode-fold.js";
 import "./mode/orgmode/orgmode-mode.js";
-import CodeMirror from "./lib/codemirror";
+import { Plugin, TextFileView, WorkspaceLeaf } from "obsidian";
 
 export default class OrgMode extends Plugin {
     async onload() {
@@ -29,12 +29,13 @@ class OrgView extends TextFileView {
 
     // this.contentEl is not exposed, so cheat a bit.
     public get extContentEl(): HTMLElement {
+        // @ts-ignore
         return this.contentEl;
     }
 
     constructor(leaf: WorkspaceLeaf) {
         super(leaf);
-
+        // @ts-ignore
         this.codeMirror = CodeMirror(this.extContentEl, {
             theme: "obsidian",
 
@@ -47,7 +48,7 @@ class OrgView extends TextFileView {
                 widget: " ...",
             },
             gutters: ["CodeMirror-foldgutter"],
-        } as CodeMirror.EditorConfiguration);
+        });
 
         this.codeMirror.on("changes", this.changed);
     }
@@ -67,6 +68,7 @@ class OrgView extends TextFileView {
 
     setViewData = (data: string, clear: boolean) => {
         if (clear) {
+            // @ts-ignore
             this.codeMirror.swapDoc(CodeMirror.Doc(data, "orgmode"));
         } else {
             this.codeMirror.setValue(data);
