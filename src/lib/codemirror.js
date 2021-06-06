@@ -1,1 +1,1 @@
-export default CodeMirror;
+module.exports = CodeMirror;
