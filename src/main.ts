@@ -10,7 +10,7 @@ export default class OrgMode extends Plugin {
         console.log("Loading Org Mode plugin ...");
 
         this.registerView("orgmode", this.orgViewCreator);
-        this.registerExtensions(["org"], "orgmode");
+        this.registerExtensions(["org", "org_archive"], "orgmode");
     }
 
     orgViewCreator = (leaf: WorkspaceLeaf) => {
@@ -101,7 +101,7 @@ class OrgView extends TextFileView {
     }
 
     canAcceptExtension(extension: string) {
-        return extension === "org";
+        return extension === "org" || extension === "org_archive";
     }
 
     getViewType() {
