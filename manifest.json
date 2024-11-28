@@ -1,7 +1,7 @@
 {
     "id": "obsidian-org-mode",
     "name": "Org Mode",
-    "version": "1.4.0",
+    "version": "1.4.1",
     "minAppVersion": "0.10.12",
     "description": "Add Org Mode support to Obsidian.",
     "author": "ryanpcmcquen",
